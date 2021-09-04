@@ -192,6 +192,19 @@ const EnrollmentForm: React.FC = () => {
     ],
     [],
   );
+  const reverseRadioOptions = useMemo<IRadioOption[]>(
+    () => [
+      {
+        text: 'Sim',
+        value: 'false',
+      },
+      {
+        text: 'Não',
+        value: 'true',
+      },
+    ],
+    [],
+  );
   const originRadioOptions = useMemo<IRadioOption[]>(
     () => [
       {
@@ -827,8 +840,8 @@ const EnrollmentForm: React.FC = () => {
           <InputGroup>
             <Radio
               name="student_ease_relating"
-              label="Tem facilidade de se relacionar?"
-              options={radioOptions}
+              label="Tem dificuldade de se relacionar?"
+              options={reverseRadioOptions}
             />
           </InputGroup>
         </FormGroup>
