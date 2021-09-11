@@ -54,7 +54,6 @@ const EnrollmentForm: React.FC = () => {
   const [showHealthProblem, setShowHealthProblem] = useState(false);
   const [showMedicationAlergy, setShowMedicationAlergy] = useState(false);
   const [showSpecialNecessities, setShowSpecialNecessities] = useState(false);
-  const [showOriginSchool, setShowOriginSchool] = useState(false);
   const [reuseAddress, setReuseAddress] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -205,19 +204,6 @@ const EnrollmentForm: React.FC = () => {
     ],
     [],
   );
-  const originRadioOptions = useMemo<IRadioOption[]>(
-    () => [
-      {
-        text: 'Matrícula',
-        value: 'true',
-      },
-      {
-        text: 'Rematrícula',
-        value: 'false',
-      },
-    ],
-    [],
-  );
 
   const handleSearchAddressByCep = useCallback(
     async (cep: string, responsibleType: 'financial' | 'supportive') => {
@@ -249,7 +235,7 @@ const EnrollmentForm: React.FC = () => {
         });
         data.financial_income_tax = data.financial_income_tax === 'true';
         data.student_ease_relating = data.student_ease_relating === 'true';
-        data.type = showOriginSchool ? 'enrollment' : 'reenrollment';
+        data.type = 'enrollment';
         data.student_health_plan = showHealthPlan
           ? data.student_health_plan
           : '';
@@ -293,7 +279,6 @@ const EnrollmentForm: React.FC = () => {
       showHealthProblem,
       showMedicationAlergy,
       showSpecialNecessities,
-      showOriginSchool,
       history,
     ],
   );
@@ -740,22 +725,12 @@ const EnrollmentForm: React.FC = () => {
               name="how_meet_school"
               label="Como conheceu a escola?"
             />
-          </InputGroup>
-          <InputGroup>
-            <Radio
-              name="has_origin_school"
-              label="Selecione uma opção:"
-              options={originRadioOptions}
-              onChange={value => setShowOriginSchool(value === 'true')}
+            <Input
+              type="text"
+              name="student_origin_school"
+              label="Escola de origem"
+              icon={FiMapPin}
             />
-            {showOriginSchool && (
-              <Input
-                type="text"
-                name="student_origin_school"
-                placeholder="Escola de origem"
-                icon={FiMapPin}
-              />
-            )}
           </InputGroup>
           <InputGroup>
             <Radio
